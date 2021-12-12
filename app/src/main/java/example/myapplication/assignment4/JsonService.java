@@ -12,13 +12,16 @@ import java.util.ArrayList;
 
 public class JsonService {
 
+    //get as a string and use it to adapter
     public ArrayList<Cosmetics> getCosmeticsFromJSON(String json)  {
         ArrayList<Cosmetics> arrayList = new ArrayList<>(0);
         try {
-            //
+            //used getJSONObject(i) instead of getJSONObject(0) and worked!
             JSONArray json_cosmetics = new JSONArray(json);
             for (int i = 0 ; i< json_cosmetics.length(); i++){
-                JSONObject cosmeticDataObj = json_cosmetics.getJSONObject(0);
+
+                //take each element in this cosmetics and check and read it
+                JSONObject cosmeticDataObj = json_cosmetics.getJSONObject(i);
 
                 // "Torbert, LA, United States"
                 String brand = cosmeticDataObj.getString("brand");

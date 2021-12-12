@@ -32,8 +32,8 @@ public interface CosmeticsDAO {
     Cosmetics getOne(String Name);
 
 
-    @Query("SELECT * FROM Cosmetics WHERE price >= :amout ")
-    List<Cosmetics> getAllCosmeticsBiggerThan(Double amout);
+    @Query("SELECT * FROM Cosmetics WHERE price >= :amount ")
+    List<Cosmetics> getAllCosmeticsBiggerThan(Double amount);
 
 
 //    @Query("SELECT * FROM Donation WHERE paymentMethod = :method")

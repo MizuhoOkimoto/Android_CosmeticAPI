@@ -18,7 +18,7 @@ public class DatabaseManager {
 
     interface DataBaseListener {
         //Implement this interface in any activity that will use this query
-        public void ListOfCosmeticsListener(List<Cosmetics> iFList); //get all
+        public void ListOfCosmeticsListener(List<Cosmetics> cosmeticsList); //get all
         public void CosmeticsListener(Cosmetics cosmetics); //get one
     }
 
@@ -53,7 +53,7 @@ public class DatabaseManager {
     }
 
     //This happens on bg thread.
-    public static void deleteImaginaryFriend(int id){
+    public static void deleteCosmetic(int id){
         dbExectuor.execute(new Runnable() {
             @Override
             public void run() {
@@ -63,7 +63,7 @@ public class DatabaseManager {
     }
 
     //This happens on bg thread.
-    public static void deleteAllImaginaryFriend(){
+    public static void deleteAllCosmetics(){
         dbExectuor.execute(new Runnable() {
             @Override
             public void run() {
@@ -79,13 +79,13 @@ public class DatabaseManager {
             @Override
             public void run() {
                 //Handler and looper will give the data back to main Thread
-                List<Cosmetics> listOfIF = dbClient.getCosmeticDAO().getAll();
+                List<Cosmetics> cosmeticsList = dbClient.getCosmeticDAO().getAll();
 
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         //On the second Runnable, I need an Interface to send data to main Thread
-                        listener.ListOfCosmeticsListener(listOfIF);
+                        listener.ListOfCosmeticsListener(cosmeticsList);
                     }
                 });
             }

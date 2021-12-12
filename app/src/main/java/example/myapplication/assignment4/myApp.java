@@ -11,7 +11,11 @@ public class myApp extends Application {
 
     private JsonService jsonService = new JsonService();
 
+    //created one networking service and it doesn't matter the lifecycle
     public NetworkingService getNetworkingService() {
         return networkingService;
     }
+
+
+
 }

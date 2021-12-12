@@ -22,9 +22,9 @@ public class CosmeticAdapter extends RecyclerView.Adapter<CosmeticAdapter.TasksV
     public List<Cosmetics> cosmeticList;
     cosmeticClickListener listener;
 
-    public CosmeticAdapter(Context mCtx, List<Cosmetics> cityList) {
+    public CosmeticAdapter(Context mCtx, List<Cosmetics> cosmeticList) {
         this.mCtx = mCtx;
-        this.cosmeticList = cityList;
+        this.cosmeticList = cosmeticList;
         listener = (cosmeticClickListener)mCtx;
     }
 
@@ -37,7 +37,8 @@ public class CosmeticAdapter extends RecyclerView.Adapter<CosmeticAdapter.TasksV
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
         Cosmetics t = cosmeticList.get(position);
-        holder.cosmeticTextView.setText(t.getBrand() +": "+t.getName());
+        holder.cosmeticTextView.setText("Brand: " + t.getBrand() +"\n"+  "Product name: " + t.getName());
+
     }
 
     @Override
@@ -59,8 +60,8 @@ public class CosmeticAdapter extends RecyclerView.Adapter<CosmeticAdapter.TasksV
 
         @Override
         public void onClick(View view) {
-            Cosmetics city = cosmeticList.get(getAdapterPosition());
-            listener.cosmeticClicked(city);
+            Cosmetics cosmetics = cosmeticList.get(getAdapterPosition());
+            listener.cosmeticClicked(cosmetics);
 
         }
     }
