@@ -2,5 +2,7 @@
     <string name="app_name">Assignment 4</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Brand name</string>
+    <string name="add_favorite">Add favorite</string>
+    <string name="picture_of_cosmetic">picture of cosmetic</string>
 
 </resources>

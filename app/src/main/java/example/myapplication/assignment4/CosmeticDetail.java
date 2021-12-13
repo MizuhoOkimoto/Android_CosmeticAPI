@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,6 +26,7 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
     ImageView image;
     NetworkingService networkingManager;
     DatabaseManager dbClient;
+    Button fav;
 
     String cosmetic_brand = "";
     String cosmetic_name = "";
@@ -46,6 +51,8 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
         price = findViewById(R.id.price);
         image = findViewById(R.id.image);
         description = findViewById(R.id.desc);
+        fav = findViewById(R.id.fav);
+
         networkingManager.listener = this;
         dbClient = new DatabaseManager(this);
         DatabaseManager.listener = this;
@@ -106,6 +113,12 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
 
     public void addFav(View view) {
         DatabaseManager.insertNewCosmetic( new Cosmetics(cosmetic_brand, cosmetic_name, cosmetic_price, cosmetic_image_link, cosmetic_description));
+        Toast.makeText(getApplicationContext(), "Added to favorite list", Toast.LENGTH_LONG).show();
+        if(fav.isPressed()) {
+            fav.setBackgroundColor(Color.GRAY);
+        } else {
+            fav.setBackgroundColor(Color.BLUE);
+        }
     }
 
     /*@Override

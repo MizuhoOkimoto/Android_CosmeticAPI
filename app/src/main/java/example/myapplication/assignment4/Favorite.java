@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
     CosmeticAdapter adapter;
     NetworkingService networkingManager;
     JsonService jsonService;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
