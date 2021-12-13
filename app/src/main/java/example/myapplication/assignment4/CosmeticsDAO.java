@@ -8,7 +8,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
 
-// insert / update / delete/ quere
 
 @Dao
 public interface CosmeticsDAO {

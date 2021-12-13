@@ -1,14 +1,12 @@
 package example.myapplication.assignment4;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +19,7 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
     CosmeticAdapter adapter;
     NetworkingService networkingManager;
     JsonService jsonService;
+    DatabaseManager dbClient;
 
 
     @Override
@@ -28,12 +27,12 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
 
-
         DatabaseManager.listener = this;
         recyclerView = findViewById(R.id.favList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        DatabaseManager.getAllCosmetics();
+        dbClient = new DatabaseManager(this);
+        dbClient.getAllCosmetics();
 
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,4 +69,5 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
         startActivityForResult(myIntent, 0);
         return true;
     }
+
 }
