@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CosmeticDetail extends AppCompatActivity implements DatabaseManager.DataBaseListener{
+public class CosmeticDetail extends AppCompatActivity implements DatabaseManager.DataBaseListener, NetworkingService.NetworkingListener {
 
     TextView brand, name, price, description;
     ImageView image;
-
+    NetworkingService networkingManager;
     DatabaseManager dbClient;
 
     String cosmetic_brand = "";
@@ -28,6 +28,7 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
     Double cosmetic_price = 0.0;
     String cosmetic_image_link = "";
     String cosmetic_description = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +39,36 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        networkingManager = ((myApp)getApplication()).getNetworkingService();
+
         brand = findViewById(R.id.brand);
         name = findViewById(R.id.name);
         price = findViewById(R.id.price);
         image = findViewById(R.id.image);
         description = findViewById(R.id.desc);
-
+        networkingManager.listener = this;
         dbClient = new DatabaseManager(this);
         DatabaseManager.listener = this;
 
         if (getIntent().hasExtra("brand")){
-           cosmetic_brand = getIntent().getStringExtra("brand");
+            cosmetic_brand = getIntent().getStringExtra("brand");
             cosmetic_name = getIntent().getStringExtra("name");
             cosmetic_price = getIntent().getDoubleExtra("price",0.0);
             cosmetic_image_link = getIntent().getStringExtra("image_link");
             cosmetic_description = getIntent().getStringExtra("description");
 
+            networkingManager.getImageData(cosmetic_image_link);
+
             brand.setText("Brand: " + cosmetic_brand);
             name.setText("Name: " + cosmetic_name);
-            price.setText(String.valueOf("Price: $" + cosmetic_price));
+            //if price is 0.0
+            if( cosmetic_price.equals(0.0))
+            {
+                price.setText("Please check store price");
+            }
+            else {
+                price.setText(String.valueOf("Price: $" + cosmetic_price));
+            }
             //image.setText(cosmetic_image_link);
             description.setText("Description: " + cosmetic_description);
         }
@@ -108,6 +120,17 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
 
     @Override
     public void CosmeticsListener(Cosmetics cosmetics) {
+
+    }
+
+    @Override
+    public void dataListener(String jsonString) {
+
+    }
+
+    @Override
+    public void imageListener(Bitmap imageCosmetic) {
+        image.setImageBitmap(imageCosmetic);
 
     }
 }

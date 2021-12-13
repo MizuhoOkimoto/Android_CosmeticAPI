@@ -2,12 +2,17 @@ package example.myapplication.assignment4;
 
 import static android.text.TextUtils.indexOf;
 import static android.text.TextUtils.substring;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class JsonService {
@@ -29,6 +34,15 @@ public class JsonService {
                 Double price = cosmeticDataObj.getDouble("price");
                 String image_link = cosmeticDataObj.getString("image_link");
                 String description = cosmeticDataObj.getString("description");
+
+              /*  Bitmap myBitmap = null;
+                try {
+                    URL url = new URL(image_link);
+                    myBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                }
+                catch(IOException e) {
+                    System.out.println(e);
+                }*/
 
                 Cosmetics c = new Cosmetics(brand, name, price,image_link,description);
                 arrayList.add(c);

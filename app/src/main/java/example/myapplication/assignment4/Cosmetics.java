@@ -1,6 +1,9 @@
 package example.myapplication.assignment4;
 
+import android.graphics.Bitmap;
+
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
@@ -31,12 +34,16 @@ public class Cosmetics { // App Model
     public String image_link;
     public String description;
 
+    @Ignore
+    Bitmap image;
+
     public Cosmetics(String brand, String name, Double price, String image_link, String description) {
         this.brand = brand;
         this.name = name;
         this.price = price;
         this.image_link = image_link;
         this.description = description;
+
     }
 
     public Cosmetics(){
@@ -45,6 +52,7 @@ public class Cosmetics { // App Model
         this.price = 0.0;
         this.image_link = "";
         this.description = "";
+
     }
 
     public int getId() {
