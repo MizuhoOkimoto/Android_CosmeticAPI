@@ -16,6 +16,4 @@ public class myApp extends Application {
         return networkingService;
     }
 
-
-
 }

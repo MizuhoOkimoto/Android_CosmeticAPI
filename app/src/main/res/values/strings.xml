@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Assignment 4</string>
+    <string name="app_name">Beauty Collection</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Brand name</string>
     <string name="add_favorite">Add favorite</string>

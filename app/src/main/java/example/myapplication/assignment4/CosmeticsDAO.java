@@ -36,8 +36,4 @@ public interface CosmeticsDAO {
     List<Cosmetics> getAllCosmeticsBiggerThan(Double amount);
 
 
-//    @Query("SELECT * FROM Donation WHERE paymentMethod = :method")
-//    List<Donation> getAllDonationsWithPaymentMethod(int method);
-
-
 }

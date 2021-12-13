@@ -14,14 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosmeticClickListener,
-        DatabaseManager.DataBaseListener{
+        DatabaseManager.DataBaseListener {
 
     ArrayList<Cosmetics> cosmetics = new ArrayList<Cosmetics>();
     RecyclerView recyclerView;
     CosmeticAdapter adapter;
     NetworkingService networkingManager;
     JsonService jsonService;
-
 
 
     @Override
@@ -56,7 +55,7 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
     @Override
     public void ListOfCosmeticsListener(List<Cosmetics> CosmeticsList) {
         cosmetics = new ArrayList<>(CosmeticsList);
-        adapter = new CosmeticAdapter(this,cosmetics);
+        adapter = new CosmeticAdapter(this, cosmetics);
         recyclerView.setAdapter(adapter);
     }
 
@@ -66,7 +65,7 @@ public class Favorite extends AppCompatActivity implements CosmeticAdapter.cosme
     }
 
     //for back button
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(myIntent, 0);
         return true;

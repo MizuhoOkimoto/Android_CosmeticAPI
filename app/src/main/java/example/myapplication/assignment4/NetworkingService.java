@@ -18,30 +18,30 @@ public class NetworkingService {
 
     private String API = "http://makeup-api.herokuapp.com/api/v1/products.json?product_tags=Canadian&product_tags=vegan&product_tags=Organic";
 
-
     //provide multi thread service
     public static ExecutorService networkExecutorService = Executors.newFixedThreadPool(4);
     //access to the main thread
     public static Handler networkingHandler = new Handler(Looper.getMainLooper());
 
     //notify our activity
-    interface NetworkingListener{
+    interface NetworkingListener {
         void dataListener(String jsonString);
+
         void imageListener(Bitmap image);
     }
 
     public NetworkingListener listener;
 
-/*    public void searchForCity(String cosmeticChars){
-        String urlString =  cosmeticChars;
+    public void searchCosmetic(String cosmeticChars) {
+        String urlString = cosmeticChars;
         connect(urlString);
-    }*/
+    }
 
- /*   private void connect(String urlString) {
-    }*/
+    private void connect(String urlString) {
+    }
 
     //GET IMAGE
-    public void getImageData(String img){
+    public void getImageData(String img) {
 
         networkExecutorService.execute(new Runnable() {
             @Override
@@ -66,7 +66,7 @@ public class NetworkingService {
     }
 
     //goes to background thread
-    public void connect(){
+    public void connect() {
         networkExecutorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -81,7 +81,7 @@ public class NetworkingService {
                     httpURLConnection = (HttpURLConnection) urlObj.openConnection();
                     httpURLConnection.setRequestMethod("GET");// post, delete, put
                     //add configuration/header
-                    httpURLConnection.setRequestProperty("Content-Type","application/json");
+                    httpURLConnection.setRequestProperty("Content-Type", "application/json");
                     //open stream itself
                     InputStream in = httpURLConnection.getInputStream();
                     //create a reader
@@ -89,8 +89,8 @@ public class NetworkingService {
                     //read integer by integer
                     int inputSteamData = 0;
                     //-1 is the end of the stream
-                    while ( (inputSteamData = reader.read()) != -1){// there is data in this stream
-                        char current = (char)inputSteamData;
+                    while ((inputSteamData = reader.read()) != -1) {// there is data in this stream
+                        char current = (char) inputSteamData;
                         //read json data as a string
                         jsonData += current;
                     }
@@ -111,8 +111,7 @@ public class NetworkingService {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     httpURLConnection.disconnect();
                 }
 

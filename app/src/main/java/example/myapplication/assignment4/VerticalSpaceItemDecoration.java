@@ -1,3 +1,4 @@
+/*
 package example.myapplication.assignment4;
 
 import android.graphics.Rect;
@@ -18,4 +19,4 @@ public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
                                RecyclerView.State state) {
         outRect.bottom = verticalSpaceHeight;
     }
-}
+}*/

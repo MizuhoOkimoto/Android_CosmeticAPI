@@ -34,7 +34,6 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
     String cosmetic_image_link = "";
     String cosmetic_description = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +43,7 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        networkingManager = ((myApp)getApplication()).getNetworkingService();
+        networkingManager = ((myApp) getApplication()).getNetworkingService();
 
         brand = findViewById(R.id.brand);
         name = findViewById(R.id.name);
@@ -57,10 +56,10 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
         dbClient = new DatabaseManager(this);
         DatabaseManager.listener = this;
 
-        if (getIntent().hasExtra("brand")){
+        if (getIntent().hasExtra("brand")) {
             cosmetic_brand = getIntent().getStringExtra("brand");
             cosmetic_name = getIntent().getStringExtra("name");
-            cosmetic_price = getIntent().getDoubleExtra("price",0.0);
+            cosmetic_price = getIntent().getDoubleExtra("price", 0.0);
             cosmetic_image_link = getIntent().getStringExtra("image_link");
             cosmetic_description = getIntent().getStringExtra("description");
 
@@ -69,11 +68,9 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
             brand.setText("Brand: " + cosmetic_brand);
             name.setText("Name: " + cosmetic_name);
             //if price is 0.0
-            if( cosmetic_price.equals(0.0))
-            {
+            if (cosmetic_price.equals(0.0)) {
                 price.setText("Please check store price");
-            }
-            else {
+            } else {
                 price.setText(String.valueOf("Price: $" + cosmetic_price));
             }
             //image.setText(cosmetic_image_link);
@@ -87,6 +84,7 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
     //for back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -112,9 +110,9 @@ public class CosmeticDetail extends AppCompatActivity implements DatabaseManager
     }
 
     public void addFav(View view) {
-        DatabaseManager.insertNewCosmetic( new Cosmetics(cosmetic_brand, cosmetic_name, cosmetic_price, cosmetic_image_link, cosmetic_description));
+        DatabaseManager.insertNewCosmetic(new Cosmetics(cosmetic_brand, cosmetic_name, cosmetic_price, cosmetic_image_link, cosmetic_description));
         Toast.makeText(getApplicationContext(), "Added to favorite list", Toast.LENGTH_LONG).show();
-        if(fav.isPressed()) {
+        if (fav.isPressed()) {
             fav.setBackgroundColor(Color.GRAY);
         } else {
             fav.setBackgroundColor(Color.BLUE);

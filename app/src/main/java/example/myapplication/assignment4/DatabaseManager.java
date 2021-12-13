@@ -110,8 +110,6 @@ public class DatabaseManager {
         });
     }
 
-    //DELETE LATER!
-
 /*    public static void getCosmeticsById(int Id){
         dbExectuor.execute(new Runnable() {
             @Override
@@ -122,7 +120,7 @@ public class DatabaseManager {
                     @Override
                     public void run() {
                         //On the second Runnable, I need an Interface to send data to main Thread
-                        listener.ImaginaryFriendsListener(iF);
+                        listener.CosmeticsListener(cosmetic);
                     }
                 });
             }

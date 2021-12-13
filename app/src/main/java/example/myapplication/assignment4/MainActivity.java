@@ -23,14 +23,14 @@ import java.util.List;
 
 //implement interfaces/ send us back data
 public class MainActivity extends AppCompatActivity implements CosmeticAdapter.cosmeticClickListener,
-        NetworkingService.NetworkingListener, DatabaseManager.DataBaseListener{
+        NetworkingService.NetworkingListener, DatabaseManager.DataBaseListener {
 
     ArrayList<Cosmetics> cosmetics = new ArrayList<Cosmetics>();
     RecyclerView recyclerView;
     CosmeticAdapter adapter;
     NetworkingService networkingManager;
     JsonService jsonService;
-
+    MenuItem search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements CosmeticAdapter.c
         DatabaseManager.listener = this;
 
 
-        networkingManager = ((myApp)getApplication()).getNetworkingService();
-        jsonService = ((myApp)getApplication()).getJsonService();
+        networkingManager = ((myApp) getApplication()).getNetworkingService();
+        jsonService = ((myApp) getApplication()).getJsonService();
         //listen for this networking notification
         networkingManager.listener = this;
         recyclerView = findViewById(R.id.productsList);
@@ -52,17 +52,17 @@ public class MainActivity extends AppCompatActivity implements CosmeticAdapter.c
         networkingManager.connect();
 
         // Get the intent, verify the action and get the query
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
-        }*/
+        }
 
     } //end of onCreate
 
-    /*private void doMySearch(String query) {
-    }*/
+    private void doMySearch(String query) {
 
+    }
 
 
     @Override
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements CosmeticAdapter.c
     @Override
     public void dataListener(String jsonString) {
         cosmetics = new ArrayList<>(jsonService.getCosmeticsFromJSON(jsonString));
-        adapter = new CosmeticAdapter(this,cosmetics);
+        adapter = new CosmeticAdapter(this, cosmetics);
         recyclerView.setAdapter(adapter);
 
         //setTitle("Search for new cities..");
@@ -106,20 +106,17 @@ public class MainActivity extends AppCompatActivity implements CosmeticAdapter.c
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.favlist: {
-
                 Intent intent = new Intent(this, Favorite.class);
                 startActivity(intent);
                 break;
             }
             case R.id.reset: {
-
                 DatabaseManager.deleteAllCosmetics();
-                //storageManager.resetHistory(MainActivity.this);
                 break;
             }
             case android.R.id.home:
+                //onBackPressed();
                 this.finish();
-                //return true;
                 break;
         }
         return true;

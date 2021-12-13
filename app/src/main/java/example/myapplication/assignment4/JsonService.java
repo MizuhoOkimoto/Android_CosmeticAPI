@@ -18,12 +18,12 @@ import java.util.ArrayList;
 public class JsonService {
 
     //get as a string and use it to adapter
-    public ArrayList<Cosmetics> getCosmeticsFromJSON(String json)  {
+    public ArrayList<Cosmetics> getCosmeticsFromJSON(String json) {
         ArrayList<Cosmetics> arrayList = new ArrayList<>(0);
         try {
             //used getJSONObject(i) instead of getJSONObject(0) and worked!
             JSONArray json_cosmetics = new JSONArray(json);
-            for (int i = 0 ; i< json_cosmetics.length(); i++){
+            for (int i = 0; i < json_cosmetics.length(); i++) {
 
                 //take each element in this cosmetics and check and read it
                 JSONObject cosmeticDataObj = json_cosmetics.getJSONObject(i);
@@ -35,16 +35,7 @@ public class JsonService {
                 String image_link = cosmeticDataObj.getString("image_link");
                 String description = cosmeticDataObj.getString("description");
 
-              /*  Bitmap myBitmap = null;
-                try {
-                    URL url = new URL(image_link);
-                    myBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                }
-                catch(IOException e) {
-                    System.out.println(e);
-                }*/
-
-                Cosmetics c = new Cosmetics(brand, name, price,image_link,description);
+                Cosmetics c = new Cosmetics(brand, name, price, image_link, description);
                 arrayList.add(c);
             }
 
